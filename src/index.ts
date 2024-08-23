@@ -16,6 +16,13 @@ async function run() {
   await cryptoService.initAccount(userId);
 
   const derivedKeyPair = derivedKeyGenerationService.getKeyPair(userId, "ServerRequestSigning");
+  console.log(derivedKeyPair);
+
+  // NOTE: Not supported because SubtleCrypto does not support P-256k1 (also known as secp256k1)
+  // This is the curve used by BIP32
+  // const subtleCryptoKey = await global.crypto.subtle.importKey("raw", derivedKeyPair.privateKey, { name: 'ECDSA', namedCurve: 'P-256' }, true, ['sign']);
+
+  // console.log(subtleCryptoKey);
 }
 
 run().catch(console.error);
