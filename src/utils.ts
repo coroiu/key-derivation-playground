@@ -98,9 +98,9 @@ export class Utils {
   //   return BufferLib.from(buffer).toString("utf8");
   // }
 
-  static fromBufferToByteString(buffer: ArrayBuffer): string {
-    return String.fromCharCode.apply(null, new Uint8Array(buffer));
-  }
+  // static fromBufferToByteString(buffer: ArrayBuffer): string {
+  //   return String.fromCharCode.apply(null, new Uint8Array(buffer));
+  // }
 
   // ref: https://stackoverflow.com/a/40031979/1090359
   static fromBufferToHex(buffer: ArrayBuffer): string {

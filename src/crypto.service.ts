@@ -1,14 +1,16 @@
 import { KeyGenerationService } from './key-generation.service';
+import { StateProvider } from './state-provider';
 import { SymmetricCryptoKey } from './symmetric-crypto-key';
 
 export type UserKey = SymmetricCryptoKey;
 
 export class CryptoService {
   constructor(
+    private readonly stateProvider: StateProvider,
     private readonly keyGenerationService: KeyGenerationService,
   ) {}
 
-  async initAccount(): Promise<{
+  async initAccount(userId: string): Promise<{
     userKey: UserKey;
     // publicKey: string;
     // privateKey: EncString;
@@ -28,6 +30,8 @@ export class CryptoService {
     // }
 
     const userKey = (await this.keyGenerationService.createKey(512)) as UserKey;
+
+    this.stateProvider.setUser({ id: userId, userKey });
     // const [publicKey, privateKey] = await this.makeKeyPair(userKey);
     // await this.setUserKey(userKey, activeUserId);
     // await this.stateProvider

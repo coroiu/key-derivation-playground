@@ -1,12 +1,21 @@
-import { HDKey } from "@scure/bip32";
+import { CryptoService } from './crypto.service';
+import { KeyGenerationService } from './key-generation.service';
+import { WebCryptoFunctionService } from './web-crypto-function.service';
+import { StateProvider } from './state-provider';
+import { DerivedKeyGenerationService } from './derived-key-generation.service';
 
-// const hdkey1 = HDKey.fromMasterSeed(seed);
-// const hdkey2 = HDKey.fromExtendedKey(base58key);
-// const hdkey3 = HDKey.fromJSON({ xpriv: string });
+async function run() {
+  const cryptoFunctionService = new WebCryptoFunctionService();
+  const keyGenerationService = new KeyGenerationService(cryptoFunctionService);
+  const stateProvider = new StateProvider();
+  const cryptoService = new CryptoService(stateProvider, keyGenerationService);
 
-// // props
-// [hdkey1.depth, hdkey1.index, hdkey1.chainCode];
-// console.log(hdkey2.privateKey, hdkey2.publicKey);
-// console.log(hdkey3.derive("m/0/2147483647'/1"));
-// const sig = hdkey3.sign(hash);
-// hdkey3.verify(hash, sig);
+  const derivedKeyGenerationService = new DerivedKeyGenerationService(stateProvider);
+
+  const userId = "fakeUserId";
+  await cryptoService.initAccount(userId);
+
+  const derivedKeyPair = derivedKeyGenerationService.getKeyPair(userId, "ServerRequestSigning");
+}
+
+run().catch(console.error);

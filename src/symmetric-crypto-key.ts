@@ -18,9 +18,9 @@ export class SymmetricCryptoKey {
   macKey?: Uint8Array | null;
   encType: EncryptionType;
 
-  keyB64: string;
-  encKeyB64: string;
-  macKeyB64: string;
+  keyB64?: string;
+  encKeyB64?: string;
+  macKeyB64?: string;
 
   meta: any;
 
@@ -76,7 +76,7 @@ export class SymmetricCryptoKey {
     return new SymmetricCryptoKey(arrayBuffer);
   }
 
-  static fromJSON(obj: Jsonify<SymmetricCryptoKey>): SymmetricCryptoKey {
-    return SymmetricCryptoKey.fromString(obj?.keyB64);
-  }
+  // static fromJSON(obj: Jsonify<SymmetricCryptoKey>): SymmetricCryptoKey {
+  //   return SymmetricCryptoKey.fromString(obj?.keyB64);
+  // }
 }
