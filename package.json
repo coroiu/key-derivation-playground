@@ -1,0 +1,15 @@
+{
+  "name": "bip32-typescript",
+  "version": "1.0.0",
+  "description": "A playground for experimenting with BIP32 in TypeScript",
+  "main": "src/index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "ts-node-dev src/index.ts"
+  },
+  "author": "Andreas Coroiu",
+  "license": "ISC",
+  "dependencies": {
+    "ts-node-dev": "^2.0.0"
+  }
+}
